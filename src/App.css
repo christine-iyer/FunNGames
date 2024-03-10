@@ -1,4 +1,4 @@
-body {
+App {
   background-color: red;
   margin: 0;
 }
@@ -15,7 +15,7 @@ body {
   flex-wrap: wrap;
   background-color: white;
   padding: 0 1.5rem;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+  box-shadow: 0 0 5px 2px rgba(245, 134, 134, 0.3);
 }
 
 .form-group {
