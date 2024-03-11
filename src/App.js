@@ -4,6 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import QuizPage from '../src/components/Quiz/pages/QuizPage'
+import TableApp from './components/TableApp/TableApp';
 
 import {
   DndContext,
@@ -12,7 +13,7 @@ import {
 import {
   arrayMove,
   SortableContext,
-  verticalListSortingStrategy,
+  rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useState } from 'react';
 
@@ -28,16 +29,16 @@ function App() {
   return (
 
     <div>
-      <QuizPage />
+
       <DndContext
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <Container className="p-3" style={{ "width": "20%" }} align="center">
+        <Container className="p-3" style={{ "width": "20%", backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
           <h3>The A B C</h3>
           <SortableContext
             items={abcs}
-            strategy={verticalListSortingStrategy}
+            strategy={rectSortingStrategy}
           >
            {abcs.map(({id, value}) => <SortableItem key={id} id={id} value={value} />)}
           </SortableContext>
@@ -48,6 +49,7 @@ function App() {
 
         </Container>
       </DndContext>
+      <TableApp />
     </div>
   );
 
