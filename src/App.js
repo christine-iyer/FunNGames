@@ -13,7 +13,8 @@ import {
 import {
   arrayMove,
   SortableContext,
-  rectSortingStrategy,
+  verticalListSortingStrategy
+  
 } from "@dnd-kit/sortable";
 import { useState } from 'react';
 
@@ -38,7 +39,7 @@ function App() {
           <h3>The A B C</h3>
           <SortableContext
             items={abcs}
-            strategy={rectSortingStrategy}
+            strategy={verticalListSortingStrategy}
           >
            {abcs.map(({id, value}) => <SortableItem key={id} id={id} value={value} />)}
           </SortableContext>

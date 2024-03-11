@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-
+import "./ToDoApp.css"
 
 export const Task = ({ id, title }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
