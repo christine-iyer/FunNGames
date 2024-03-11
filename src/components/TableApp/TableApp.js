@@ -43,8 +43,8 @@ export default function TableApp(){
                          const min = Math.floor(value % 60);
                          return (
                            <>
-                             {hour > 0 ? `${hour} hr${hour > 1 ? "s " : ""}` : ""}
-                             {min > 0 ? `${min}  min${min > 1 ? "s " : ""}` : ""}
+                             {hour > 0 ? `${hour} h${hour > 1 ? "" : ""}` : ""}
+                             {min > 0 ? ` ${min}  m${min > 1 ? "" : ""}` : ""}
                            </>
                          );
                        }
@@ -56,7 +56,7 @@ export default function TableApp(){
                     Header: " Score", 
                     accessor: 'score',
                     Cell: ({ cell: { value } }) => {
-                         const roundedScore = (value *100).toFixed(2);
+                         const roundedScore = (value *100).toFixed(0);
                         
                          return (
                            <>

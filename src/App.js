@@ -3,7 +3,7 @@ import { SortableItem } from './SortableItem';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
-import QuizPage from '../src/components/Quiz/pages/QuizPage'
+import ToDoApp from './components/ToDoApp/ToDoApp';
 import TableApp from './components/TableApp/TableApp';
 
 import {
@@ -49,7 +49,7 @@ function App() {
 
         </Container>
       </DndContext>
-      <TableApp />
+      <ToDoApp />
     </div>
   );
 
