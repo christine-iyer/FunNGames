@@ -1,5 +1,11 @@
 import { useState } from "react"
 import ToDoList from "./ToDoList"
+import {
+     arrayMove,
+     SortableContext,
+     verticalListSortingStrategy
+     
+   } from "@dnd-kit/sortable";
 export default function DndToDoList() {
      const [todos, setTodos] = useState([])
 
@@ -28,6 +34,26 @@ export default function DndToDoList() {
           todosCopy.splice(indexOfTodo, 1)
           setTodos([...todosCopy])
      };
+     
+     function handleDragEnd(event) {
+          console.log("Drag end called");
+          const { active, over } = event;
+          console.log("ACTIVE: " + active.id);
+          console.log("OVER :" + over.id);
+      
+          if (active.id !== over.id) {
+            setTodos((items) => {
+              // const activeIndex = items.indexOf(active.id);
+              // const overIndex = items.indexOf(over.id);
+              const activeIndex = items.findIndex(({ id }) => id ===  active.id);
+              const overIndex = items.findIndex(({ id }) => id ===  over.id);
+              console.log(arrayMove(items, activeIndex, overIndex));
+              return arrayMove(items, activeIndex, overIndex);
+            });
+          }
+        }
+
+
      return (
           <div className="App">
                <ToDoList
@@ -36,6 +62,7 @@ export default function DndToDoList() {
                     completeTodo={completeTodo}
                     editTodoText={editTodoText}
                     deleteTodo={deleteTodo}
+                    handleDragEnd={handleDragEnd}
                />
           </div>
      )

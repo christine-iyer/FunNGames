@@ -1,13 +1,25 @@
 import Todo from './Todo'
-
+import {
+  DndContext,
+  closestCenter
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy
+  
+} from "@dnd-kit/sortable";
+import { Container } from 'react-bootstrap';
 
 export default function TodoList({
   todos,
   addTodo,
   completeTodo,
   deleteTodo,
-  editTodoText
+  editTodoText,handleDragEnd
 }) {
+  
+  
   return (
     <>
 
@@ -22,24 +34,17 @@ export default function TodoList({
       </div>
       {todos.length ? (
         <>
-          <div className="nowlist">
-            {/* <DndContext
+      <DndContext
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <Container className="p-3" style={{  backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
-          <h3>FunNGames</h3>
-          <SortableContext
-            items={abcs}
-            strategy={verticalListSortingStrategy}
-          >
-           {abcs.map(({id, value}) => <SortableItem key={id} id={id} value={value} />)}
-          </SortableContext>
-          </Container>
-      </DndContext> */}
+
+
+          <Container className="nowlist">
+
 
             <h1>Todo Items</h1>
-            <ul>
+            <SortableContext items={todos}>
               {todos
                 .filter((i) => !i.completed)
                 .map((todo) => {
@@ -53,25 +58,12 @@ export default function TodoList({
                     />
                   )
                 })}
-            </ul>
+            </SortableContext>
 
-          </div>
+          </Container>
 
           <div className="neverlist">
-            {/* <DndContext
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <Container className="p-3" style={{  backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
-          <h3>FunNGames</h3>
-          <SortableContext
-            items={abcs}
-            strategy={verticalListSortingStrategy}
-          >
-           {abcs.map(({id, value}) => <SortableItem key={id} id={id} value={value} />)}
-          </SortableContext>
-          </Container>
-      </DndContext> */}
+
 
             
 
@@ -93,10 +85,13 @@ export default function TodoList({
                 })}
             </ul>
           </div>
+          </DndContext>
         </>
       ) : (
         <h1>No Todos Added Yet</h1>
       )}
     </>
+    
   )
+
 }
