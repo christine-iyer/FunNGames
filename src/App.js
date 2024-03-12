@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import ToDoApp from './components/ToDoApp/ToDoApp';
 import TableApp from './components/TableApp/TableApp';
-
+import DndToDoList from './components/DndToDoApp/DndToDoList';
 import {
   DndContext,
   closestCenter
@@ -35,22 +35,20 @@ function App() {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <Container className="p-3" style={{ "width": "20%", backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
-          <h3>The A B C</h3>
+        <Container className="p-3" style={{  backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
+          <h3>FunNGames</h3>
           <SortableContext
             items={abcs}
             strategy={verticalListSortingStrategy}
           >
            {abcs.map(({id, value}) => <SortableItem key={id} id={id} value={value} />)}
           </SortableContext>
-
-         
-
-
-
-        </Container>
+          </Container>
       </DndContext>
-      <ToDoApp />
+      <DndToDoList />
+      {/* <ToDoApp/>
+      <TableApp /> */}
+
     </div>
   );
 
