@@ -4,15 +4,8 @@ import {
   DndContext,
   closestCenter
 } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  verticalListSortingStrategy
-  
-} from "@dnd-kit/sortable";
+import {arrayMove,SortableContext,verticalListSortingStrategy} from "@dnd-kit/sortable";
 import { Container } from 'react-bootstrap';
-
-
 export default function TodoList({
   todos,
   addTodo,
@@ -20,28 +13,9 @@ export default function TodoList({
   deleteTodo,
   editTodoText,handleDragEnd
 }) {
-  
-  
   return (
     <>
-          <DndContext
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <Container className="p-3" style={{  backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
-          <h3>FunNGames</h3>
-          <SortableContext
-            items={todos}
-            strategy={verticalListSortingStrategy}
-          >
-           {todos
-           .filter((i)=> !i.completed)
-           .map(({id, text}) => <SortableItem key={id} id={id} text={text} />)}
-          </SortableContext>
-          </Container>
-      </DndContext>
-
-      <div className='newtodo'>
+   <div className='newtodo'>
         <h1>Create Todo</h1>
         <input
           type="text"
@@ -52,20 +26,11 @@ export default function TodoList({
       </div>
       {todos.length ? (
         <>
-      <DndContext
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
 
-
-          <Container className="nowlist">
-
-
-            <h1>Todo Items</h1>
-            <SortableContext items={todos}>
-              {todos.filter((i) => !i.completed).map((todo) => {
+<Container className="nowlist">
+ <h1>Todo Items</h1>
+       {todos.filter((i) => !i.completed).map((todo) => {
                   return (
-                    
                     <Todo
                       key={todo.id}
                       todo={todo}
@@ -75,19 +40,43 @@ export default function TodoList({
                     />
                   )
                 })}
-            </SortableContext>
+</Container>
 
+<DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <Container className="p-3" style={{  backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
+          <h3>To Dos in a Sortable Fashion</h3>
+          <SortableContext items={todos} strategy={verticalListSortingStrategy}>
+           {todos
+           .filter((i)=> !i.completed)
+           .map(({id, text}) => <SortableItem key={id} id={id} text={text}  />)}
+           <button onClick={deleteTodo}>X</button>
+          </SortableContext>
           </Container>
+      </DndContext>
+
 
           <div className="neverlist">
 
 
+<h1>Completed Items </h1>
+<DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <Container className="p-3" style={{  backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
+          <h3>Key Wins in a Sortable Fashion</h3>
+          <SortableContext items={todos} strategy={verticalListSortingStrategy}>
+           {todos
+           .filter((i)=> i.completed)
+           .map(({id, text}) => <SortableItem key={id} id={id} text={text} deleteTodo={deleteTodo}>
             
+           </SortableItem>)}
+       
 
-            <h1>Completed Items </h1>
-            <ul>
+          </SortableContext>
+          </Container>
+      </DndContext>
 
-              {todos
+
+            {/* <ul>
+{todos
                 .filter((i) => i.completed)
                 .map((todo) => {
                   return (
@@ -100,15 +89,12 @@ export default function TodoList({
                     />
                   )
                 })}
-            </ul>
+            </ul> */}
           </div>
-          </DndContext>
         </>
       ) : (
         <h1>No Todos Added Yet</h1>
       )}
     </>
-    
   )
-
 }

@@ -20,7 +20,7 @@ export function SortableItem(props) {
 
     return (
         <div  ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <Card body className="m-3">{props.value}</Card>
+            <Card body className="m-3">{props.value} {props.completed}</Card>
         </div>
     )
 }
