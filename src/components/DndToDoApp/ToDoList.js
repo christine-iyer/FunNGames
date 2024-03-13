@@ -1,4 +1,5 @@
 import Todo from './Todo'
+import { SortableItem } from './SortableItem'
 import {
   DndContext,
   closestCenter
@@ -11,6 +12,7 @@ import {
 } from "@dnd-kit/sortable";
 import { Container } from 'react-bootstrap';
 
+
 export default function TodoList({
   todos,
   addTodo,
@@ -22,6 +24,22 @@ export default function TodoList({
   
   return (
     <>
+          <DndContext
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <Container className="p-3" style={{  backgroundColor:'rgba(23,155,87,0.3)' }} align="center">
+          <h3>FunNGames</h3>
+          <SortableContext
+            items={todos}
+            strategy={verticalListSortingStrategy}
+          >
+           {todos
+           .filter((i)=> !i.completed)
+           .map(({id, text}) => <SortableItem key={id} id={id} text={text} />)}
+          </SortableContext>
+          </Container>
+      </DndContext>
 
       <div className='newtodo'>
         <h1>Create Todo</h1>
@@ -45,10 +63,9 @@ export default function TodoList({
 
             <h1>Todo Items</h1>
             <SortableContext items={todos}>
-              {todos
-                .filter((i) => !i.completed)
-                .map((todo) => {
+              {todos.filter((i) => !i.completed).map((todo) => {
                   return (
+                    
                     <Todo
                       key={todo.id}
                       todo={todo}
